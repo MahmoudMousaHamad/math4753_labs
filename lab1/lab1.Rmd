@@ -122,7 +122,8 @@ barplot(table(ddt$RIVER), col = c("red", "blue", "yellow", "green"))
 > Make a table of the rivers crossed with the species of fish.
 
 ```{r}
-table(ddt$RIVER, ddt$SPECIES)
+my_table = table(ddt$RIVER, ddt$SPECIES)
+my_table
 ```
 
 
@@ -131,7 +132,7 @@ table(ddt$RIVER, ddt$SPECIES)
 > Make a barplot of the rivers crossed with the species of fish.
 
 ```{r}
-barplot(table(ddt$RIVER, ddt$SPECIES))
+barplot(my_table, legend = unique(ddt$RIVER), col = c("red", "blue", "green", "yellow"), args.legend = list(x = "topright"))
 ```
 
 # Task 5
