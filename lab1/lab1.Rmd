@@ -1,0 +1,216 @@
+---
+title: "lab1"
+author: "Mahmoud Mousa Hamad"
+date: "1/15/2020"
+output: html_document
+---
+
+# Task 1
+
+> Print working directory.
+
+```{r}
+getwd()
+```
+
+# Task 2
+
+> Obtain first six lines of the data.
+
+```{r}
+ddt = read.csv("Lab1.csv")
+head(ddt)
+
+```
+
+# Task 3
+
+## Task 3.1
+
+> What are the qualitative variables in “ddt”?
+
+> ANSWER: RIVER and SPECIES
+
+## Task 3.2
+
+> What are the quantitative variables in “ddt”?
+
+> ANSWER: MILE, LENGTH, WEIGHT, and DDT.
+
+## Task 3.3
+
+> How many SPECIES are in the ddt data set?
+
+> ANSWER: 3
+
+## Task 3.4
+
+> Subset the ddt data set so that we see only the observations with SPECIES,  LMBASS and WEIGHT bigger than 800gms.
+
+``` {r}
+ddt[ddt$SPECIES %in% c("LMBASS") & ddt$WEIGHT > 800, ]
+```
+
+## Task 3.5
+
+> Subset the ddt data set so that we see only those observations where the RIVER is SCM   and DDT bigger than 4.0.
+
+``` {r}
+ddt[ddt$RIVER %in% "SCM" & ddt$DDT > 4.0, ]
+```
+
+## Task 3: Clicker Questions Sub-Sections
+
+### Q1
+
+> Find the mean length of fish in the ddt data frame
+
+```{r}
+mean(ddt$LENGTH)
+```
+
+
+### Q2
+
+> What is the standard deviation of the weight of fish in the ddt data frame?
+
+```{r}
+sd(ddt$WEIGHT)
+```
+
+
+### Q3
+
+> Is this the plot of LENGTH vs WEIGHT from the ddt data frame?
+
+``` {r}
+plot(ddt$LENGTH, ddt$WEIGHT)
+```
+
+> ANSWER: YES
+
+### Q4
+
+> If v=1:20 what is the last value of v/20?
+
+```{r}
+v = 1:20
+(v/20)[20]
+```
+
+# Task 4
+
+## Task 4.1
+
+> Make a table of the rivers.
+
+```{r}
+table(ddt$RIVER)
+```
+
+
+## Task 4.2
+
+> Make a color coded barplot of the rivers.
+
+```{r}
+barplot(table(ddt$RIVER), col = c("red", "blue", "yellow", "green"))
+```
+
+## Task 4.3
+
+> Make a table of the rivers crossed with the species of fish.
+
+```{r}
+table(ddt$RIVER, ddt$SPECIES)
+```
+
+
+## Task 4.4
+
+> Make a barplot of the rivers crossed with the species of fish.
+
+```{r}
+barplot(table(ddt$RIVER, ddt$SPECIES))
+```
+
+# Task 5
+
+>	Make a pie chart of Fish SPECIES
+
+```{r}
+pie(table(ddt$SPECIES))
+```
+
+
+> Make a pie chart of RIVERS
+
+```{r}
+pie(table(ddt$RIVER))
+```
+
+# Task 6
+
+> Make a boxplot of the variable DDT
+
+```{r}
+boxplot(ddt$DDT)
+```
+
+> Make a boxplot of the variable WEIGHT
+
+```{r}
+boxplot(ddt$WEIGHT)
+```
+
+> Make a boxplot of the variable LENGTH
+
+```{r}
+boxplot(ddt$LENGTH)
+```
+
+# Task 7
+
+>	Make a coplot of LENGTH Vs WEIGHT given RIVER
+
+```{r}
+coplot(ddt$LENGTH ~ ddt$WEIGHT | ddt$RIVER)
+```
+
+>	Make a coplot of DDT Vs WEIGHT given SPECIES
+
+```{r}
+coplot(ddt$DDT ~ ddt$WEIGHT | ddt$SPECIES)
+```
+
+# Task 8
+
+> Boxplot
+
+```{r}
+ggplot2::ggplot(ddt, ggplot2::aes(x = SPECIES, y = WEIGHT, z = RIVER, fill = RIVER)) +      ggplot2::geom_boxplot() +
+ggplot2::ggtitle("Mahmoud Mousa Hamad")
+```
+
+
+> Violin plot
+
+```{r}
+library(ggplot2)
+ggplot(ddt, aes(x = RIVER, y = LENGTH, z = SPECIES, fill = SPECIES)) + 
+geom_violin()  +
+ggtitle("Mahmoud Mousa Hamad")
+```
+
+> Scatter plot
+
+```{r}
+library(ggplot2)
+ggplot(ddt, aes(x = WEIGHT, y = LENGTH, z = SPECIES, fill = SPECIES, color = SPECIES)) + 
+geom_point()  +
+ggtitle("Mahmoud Mousa Hamad")
+```
+
+
+
+
