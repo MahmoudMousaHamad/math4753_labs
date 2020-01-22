@@ -1,0 +1,39 @@
+---
+title: "lab2"
+author: "Mahmoud Mousa Hamad"
+date: "1/21/2020"
+output: html_document
+---
+
+# Task 1:
+``` {r}
+directory = getwd()
+directory
+```
+
+# Task 2:
+``` {r}
+data = read.csv("EPAGAS.csv")
+head(data)
+```
+
+# Task 3:
+```{r}
+mpg = as.vector(t(data))
+s = sd(mpg)
+z = (mpg - mean(mpg)) / s
+mpg_outliers = z[abs(z)>=2 & abs(z)<=3]
+
+mycol = ifelse(abs(z)>3, "Red",
+        ifelse(abs(z)>=2 &abs(z)<=3,"Blue", "Black"))
+list(z_mean = mean(z), sd_of_z_squared = sd(z)^2, mpg_outliers = mpg_outliers)
+library(lattice)
+dotplot(z,col=mycol)
+
+```
+
+# Tasl 4:
+``` {r}
+boxplot(mpg, col = "black", notch = TRUE, main = "Box plot of Miles Per Gallon (MPG)", horizontal = TRUE)
+pnorm(mpg, 2*sd(mpg), mean = mean(mpg))
+```
